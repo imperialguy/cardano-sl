@@ -229,6 +229,7 @@ executable cardano-launcher
                      , safe-exceptions
                      , silently
                      , text
+                     , tuple
                      , time-units
                      , universum
   if !os(windows)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set +eo xtrace
+set -eo xtrace
 
 # Make sure we're in a tmux session.
 if ! [ -n "$TMUX" ]; then
@@ -144,11 +144,11 @@ while [[ $i -lt $panesCnt ]]; do
         launcher_args="--node $node_ "
         if [[ "$UI" != "" ]]; then
           ui_args_="$(prefix_args "$UI_ARGS" "-w")"
-          launcher_args=" $launcher_args --wallet $UI $ui_args_"
+          launcher_args=" $launcher_args --wlogging --wallet $UI $ui_args_"
         fi
         node_args_="$(prefix_args "$node_args" "-n")"
         launcher_args=" $launcher_args --updater /usr/bin/env -u bash --update-archive $updater_file"
-        launcher_args=" $launcher_args --node-timeout 5 $node_args_ --system-start 0 --wlogging --db-path $run_dir/node-db$i $rts_opts $reb $no_ntp $keys_args --wallet-log-path logs/launcher/wallet-node-log.txt --node-log-path logs/launcher/node-log.txt"
+        launcher_args=" $launcher_args --node-timeout 5 $node_args_ --system-start 0  --db-path $run_dir/node-db$i $rts_opts $reb $no_ntp $keys_args"
         tmux send-keys "$launcher_ $launcher_args" C-m
     else
         echo "$node_ $node_args"
